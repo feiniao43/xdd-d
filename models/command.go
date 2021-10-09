@@ -253,7 +253,7 @@ var codeSignals = []CodeSignal{
 	{
 		Command: []string{"coin", "许愿币", "余额", "yu", "yue"},
 		Handle: func(sender *Sender) interface{} {
-			return fmt.Sprintf("互助值余额%d", GetCoin(sender.UserID))
+			return fmt.Sprintf("许愿币余额%d", GetCoin(sender.UserID))
 		},
 	},
 
@@ -385,7 +385,7 @@ var codeSignals = []CodeSignal{
 			if len(sender.Contents) > 1 {
 				sender.Contents = sender.Contents[1:]
 				AdddCoin(qq, Int(sender.Contents[1]))
-				sender.Reply(fmt.Sprintf("你获得%d枚互助值。", Int(sender.Contents[1])))
+				sender.Reply(fmt.Sprintf("你获得%d枚许愿币。", Int(sender.Contents[1])))
 			}
 			return nil
 		},
@@ -556,7 +556,7 @@ var codeSignals = []CodeSignal{
 				}
 				return strings.Join(rt, "\n")
 			}
-			cost := 88
+			cost := 8
 			if sender.IsAdmin {
 				cost = 1
 			}
