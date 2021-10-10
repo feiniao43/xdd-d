@@ -221,7 +221,7 @@ func (ck *JdCookie) Query() string {
 
 	} else {
 		msgs = append(msgs, []string{
-			"提醒：该账号已过期，请重新登录",
+			"提醒：该账号ck已失效过期，请重新提交登录",
 		}...)
 	}
 	ck.PtPin, _ = url.QueryUnescape(ck.PtPin)
