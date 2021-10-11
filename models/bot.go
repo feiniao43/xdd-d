@@ -248,7 +248,7 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 							}
 						}
 					} else {
-						sender.Reply(fmt.Sprintf("无效CK或者CK已经失效！，许愿币-1，余额%d"))
+						sender.Reply(fmt.Sprintf("无效CK或者CK已经失效！，许愿币-1，余额%d", RemCoin(sender.UserID, 1))
 					}
 				}
 				go func() {
