@@ -119,7 +119,7 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 					if err != nil {
 						logs.Error(err)
 					}
-					if strings.Contains(rsp, "错误") {
+					if strings.Contains(rsp, "fake_") {
 						logs.Error("wskey错误")
 						sender.Reply(fmt.Sprintf("wskey错误"))
 					} else {
@@ -193,12 +193,12 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 				if !sender.IsAdmin {
 					coin := GetCoin(sender.UserID)
 					if coin < Config.Tyt {
-						return fmt.Sprintf("推一推需要%d个许愿币，努力赚许愿币，实在不行梭哈，梭几把，搏一搏，单车变摩托", Config.Tyt)
+						return fmt.Sprintf("推一推需要%d个互助值", Config.Tyt)
 					}
-					RemCoin(sender.UserID, 80)
-					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币", Config.Tyt))
+					RemCoin(sender.UserID, 8)
+					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个互助值", Config.Tyt))
 				} else {
-					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币，管理员通道", Config.Tyt))
+					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个互助值，管理员通道", Config.Tyt))
 				}
 
 				runTask(&Task{Path: "jd_tyt.js", Envs: []Env{
@@ -242,13 +242,15 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 								msg := fmt.Sprintf("添加账号，账号名:%s", ck.PtPin)
 								if sender.IsQQ() {
 									ck.Update(QQ, ck.QQ)
-															}
-								sender.Reply(fmt.Sprintf("很棒，许愿币+1，余额%d,请群里面@Q群管家查看新手任务注意事项，不做完新手任务会黑号，请务必重视！", AddCoin(sender.UserID)))
+								}
+								sender.Reply(fmt.Sprintf(msg))
+								sender.Reply(ck.Query())
+								(&JdCookie{}).Push(msg)
 								logs.Info(msg)
 							}
 						}
 					} else {
-						sender.Reply(fmt.Sprintf("无效CK或者CK已经失效！，许愿币-1，余额%d", RemCoin(sender.UserID, 1)))
+						sender.Reply(fmt.Sprintf("无效"))
 					}
 				}
 				go func() {
