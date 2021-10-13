@@ -11,7 +11,7 @@ import (
 	"github.com/beego/beego/v2/core/logs"
 )
 
-var version = "20211009-002"
+var version = "20211013-002"
 var describe = "日常更新"
 var AppName = "xdd"
 var pname = regexp.MustCompile(`/([^/\s]+)`).FindStringSubmatch(os.Args[0])[1]
