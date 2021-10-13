@@ -325,7 +325,7 @@ var codeSignals = []CodeSignal{
 		},
 	},
 	{
-		Command: []string{"详细查询", "query"},
+		Command: []string{"新版查询", "query"},
 		Handle: func(sender *Sender) interface{} {
 			if sender.IsAdmin {
 				sender.handleJdCookies(func(ck *JdCookie) {
@@ -416,7 +416,7 @@ var codeSignals = []CodeSignal{
 				}
 				return nil
 			},
-		},
+		},*/
 		{
 			Command: []string{"梭哈", "拼了", "梭了"},
 			Handle: func(sender *Sender) interface{} {
@@ -476,7 +476,7 @@ var codeSignals = []CodeSignal{
 		//	},
 		//},
 		{
-			Command: []string{"赌一把"},
+			Command: []string{"翻翻乐"},
 			Handle: func(sender *Sender) interface{} {
 
 				cost := Int(sender.JoinContens())
@@ -511,7 +511,7 @@ var codeSignals = []CodeSignal{
 				return nil
 			},
 		},
-	*/
+	
 	{
 		Command: []string{"许愿", "愿望", "wish", "hope", "want"},
 		Handle: func(sender *Sender) interface{} {
