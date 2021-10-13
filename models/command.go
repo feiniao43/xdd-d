@@ -95,8 +95,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			}
 		}
 		if !ok {
-			sender.Reply("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck或者wskey发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项")
-			return errors.New("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck或者wskey发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项")
+			sender.Reply("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项")
+			return errors.New("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项")
 		}
 	} else {
 		cks = LimitJdCookie(cks, a)
@@ -378,7 +378,7 @@ var codeSignals = []CodeSignal{
 		},
 	},
 	{
-		Command: []string{"QQ转账"},
+		Command: []string{"转账"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			qq := Int(sender.Contents[0])
@@ -451,7 +451,12 @@ var codeSignals = []CodeSignal{
 					sender.Reply(fmt.Sprintf("恭喜你太幸运了，暴击x3获得%d枚许愿币，5秒后自动转入余额。", cost))
 					time.Sleep(time.Second * 5)
 
-						
+				}
+
+			        if r == 7 {
+					cost *= 2
+					sender.Reply(fmt.Sprintf("恭喜你太幸运了，暴击x2获得%d枚许愿币，5秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 5)				
 				
 				} else  {
 				
@@ -917,7 +922,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	{
+	/*{
 		Command: []string{"转账"},
 		Handle: func(sender *Sender) interface{} {
 			cost := 1
@@ -979,7 +984,7 @@ var codeSignals = []CodeSignal{
 			tx.Commit()
 			return fmt.Sprintf("转账成功，你的余额%d，他的余额%d，手续费%d。", s.Coin-amount, r.Coin+real, cost)
 		},
-	},
+	},*/
 	{
 		Command: []string{"献祭", "导出"},
 		Admin:   true,
