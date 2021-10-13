@@ -544,7 +544,7 @@ var codeSignals = []CodeSignal{
 				}
 				return strings.Join(rt, "\n")
 			}
-			cost := 88
+			cost := 8
 			if sender.IsAdmin {
 				cost = 1
 			}
@@ -749,11 +749,11 @@ var codeSignals = []CodeSignal{
 			}
 			mx[sender.UserID] = true
 			if db.Model(User{}).Where("number = ? ", sender.UserID).Update(
-				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 1)),
+				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 8)),
 			).RowsAffected == 0 {
 				return "先去打卡吧你。"
 			}
-			return "许愿币+1"
+			return "许愿币+8"
 		},
 	},
 	{
