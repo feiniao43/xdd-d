@@ -472,41 +472,41 @@ var codeSignals = []CodeSignal{
 		//	},
 		//},
 		{
-			Command: []string{"翻翻乐"},
-			Handle: func(sender *Sender) interface{} {
+		Command: []string{"翻翻乐"},
+		Handle: func(sender *Sender) interface{} {
 
-				cost := Int(sender.JoinContens())
-				if cost <= 0 || cost > 10000 {
-					cost = 1
-				}
-				u := &User{}
-				if err := db.Where("number = ?", sender.UserID).First(u).Error; err != nil || u.Coin < cost {
-					return "许愿币不足，先去打卡吧。"
-				}
-				baga := 0
-				if u.Coin > 100000 {
-					baga = u.Coin
-					cost = u.Coin
-				}
-				r := time.Now().Nanosecond() % 10
-				if r < 6 || baga > 0 {
-					sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
-					cost = -cost
+			cost := Int(sender.JoinContens())
+			if cost <= 0 || cost > 20 {
+				cost = 5
+			}
+			u := &User{}
+			if err := db.Where("number = ?", sender.UserID).First(u).Error; err != nil || u.Coin < cost {
+				return "许愿币不足，先去打卡吧。"
+			}
+			baga := 0
+			if u.Coin > 100000 {
+				baga = u.Coin
+				cost = u.Coin
+			}
+			r := time.Now().Nanosecond() % 10
+			if r < 6 || baga > 0 {
+				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
+				cost = -cost
+			} else {
+				if r == 9 {
+					cost *= 2
+					sender.Reply(fmt.Sprintf("恭喜你幸运暴击x2获得%d枚许愿币，5秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 5)
 				} else {
-					if r == 9 {
-						cost *= 2
-						sender.Reply(fmt.Sprintf("恭喜你幸运暴击获得%d枚许愿币，20秒后自动转入余额。", cost))
-						time.Sleep(time.Second * 20)
-					} else {
-						sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，10秒后自动转入余额。", cost))
-						time.Sleep(time.Second * 10)
-					}
-					sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
+					sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，5秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 5)
 				}
-				db.Model(u).Update("coin", gorm.Expr(fmt.Sprintf("coin + %d", cost)))
-				return nil
-			},
+				sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
+			}
+			db.Model(u).Update("coin", gorm.Expr(fmt.Sprintf("coin + %d", cost)))
+			return nil
 		},
+	},
 	
 	{
 		Command: []string{"许愿", "愿望", "wish", "hope", "want"},
