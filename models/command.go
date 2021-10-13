@@ -201,7 +201,7 @@ var codeSignals = []CodeSignal{
 				db.Model(User{}).Select("count(id) as total").Where("active_at > ?", zero).Pluck("total", &total)
 				coin := 5
 				if total[0]%50 == 0 {
-					coin = 25
+					coin = 50
 				}
 				if total[0]%4 == 1 {
 					coin = 10
