@@ -95,8 +95,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			}
 		}
 		if !ok {
-			sender.Reply("你尚未绑定🐶东账号，请提交wskey，提交后即可查询账户资产信息。")
-			return errors.New("你尚未绑定🐶东账号，请提交wskey，提交后即可查询账户资产信息。")
+			sender.Reply("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
+			return errors.New("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
 		}
 	} else {
 		cks = LimitJdCookie(cks, a)
@@ -165,7 +165,7 @@ var codeSignals = []CodeSignal{
 		},
 	},
 	{
-		Command: []string{"sign", "打卡", "签到"},
+		Command: []string{ "打卡", "签到"},
 		Handle: func(sender *Sender) interface{} {
 			//if sender.Type == "tgg" {
 			//	sender.Type = "tg"
@@ -178,15 +178,14 @@ var codeSignals = []CodeSignal{
 			var ntime = time.Now()
 			var first = false
 			total := []int{}
-			err := db.Where("number = ?", sender.UserID).First(&u).Error
+			err := db.Where("class = ? and number = ?", sender.Type, sender.UserID).First(&u).Error
 			if err != nil {
 				first = true
 				u = User{
 					Class:    sender.Type,
 					Number:   sender.UserID,
-					Coin:     1,
+					Coin:     15,
 					ActiveAt: ntime,
-					Womail:   "",
 				}
 				if err := db.Create(&u).Error; err != nil {
 					return err.Error()
@@ -200,22 +199,19 @@ var codeSignals = []CodeSignal{
 			}
 			if first {
 				db.Model(User{}).Select("count(id) as total").Where("active_at > ?", zero).Pluck("total", &total)
-				coin := 1
-				if total[0]%3 == 0 {
-					coin = 2
+				coin := 5
+				if total[0]%50 == 0 {
+					coin = 50
 				}
-				if total[0]%13 == 0 {
-					coin = 8
+				if total[0]%4 == 1 {
+					coin = 10
+			
 				}
 				db.Model(&u).Updates(map[string]interface{}{
 					"active_at": ntime,
 					"coin":      gorm.Expr(fmt.Sprintf("coin+%d", coin)),
 				})
 				u.Coin += coin
-				if u.Womail != "" {
-					rsp := cmd(fmt.Sprintf(`python3 womail.py "%s"`, u.Womail), &Sender{})
-					sender.Reply(fmt.Sprintf("%s", rsp))
-				}
 				sender.Reply(fmt.Sprintf("你是打卡第%d人，奖励%d个许愿币，许愿币余额%d。", total[0]+1, coin, u.Coin))
 				ReturnCoin(sender)
 				return ""
