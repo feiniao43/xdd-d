@@ -267,7 +267,7 @@ var codeSignals = []CodeSignal{
 			if err := Update(sender); err != nil {
 				return err.Error()
 			}
-			sender.Reply("重启程序")
+			sender.Reply("小白龙重启程序")
 			Daemon()
 			return nil
 		},
