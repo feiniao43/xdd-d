@@ -187,20 +187,17 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 				}
 			}
 		}
-		{ //tyt
+			{ //tyt
 			ss := regexp.MustCompile(`packetId=(\S+)(&|&amp;)currentActId`).FindStringSubmatch(msg)
 			if len(ss) > 0 {
 				if !sender.IsAdmin {
 					coin := GetCoin(sender.UserID)
-					if coin < Config.Tyt {
-						return fmt.Sprintf("推一推需要%d个许愿币，努力赚许愿币，实在不行梭哈，梭几把，搏一搏，单车变摩托", Config.Tyt)
+					if coin < 100 {
+						return "推一推需要100个许愿币，努力赚许愿币，实在不行梭哈，梭几把，搏一搏，单车变摩托"
 					}
 					RemCoin(sender.UserID, 100)
-					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币", Config.Tyt))
-				} else {
-					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币，管理员通道", Config.Tyt))
+					sender.Reply("推起来，已扣除100个许愿币，稍后成功会@你")
 				}
-
 				runTask(&Task{Path: "jd_tyt.js", Envs: []Env{
 					{Name: "tytpacketId", Value: ss[1]},
 				}}, sender)
