@@ -196,7 +196,7 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 						return "推一推需要100个许愿币，努力赚许愿币，实在不行梭哈，梭几把，搏一搏，单车变摩托"
 					}
 					RemCoin(sender.UserID, 100)
-					sender.Reply("推起来，已扣除100个许愿币，稍后成功会@你")
+					sender.Reply("推起来啦，已扣除100个许愿币，稍后成功会@你")
 				}
 				runTask(&Task{Path: "jd_tyt.js", Envs: []Env{
 					{Name: "tytpacketId", Value: ss[1]},
