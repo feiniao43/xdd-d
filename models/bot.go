@@ -195,7 +195,7 @@ var handleMessage = func(msgs ...interface{}) interface{} {
 					if coin < Config.Tyt {
 						return fmt.Sprintf("推一推需要%d个许愿币，努力赚许愿币，实在不行梭哈，梭几把，搏一搏，单车变摩托", Config.Tyt)
 					}
-					RemCoin(sender.UserID, 80)
+					RemCoin(sender.UserID, 100)
 					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币", Config.Tyt))
 				} else {
 					sender.Reply(fmt.Sprintf("推一推即将开始，已扣除%d个许愿币，管理员通道", Config.Tyt))
