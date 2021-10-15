@@ -419,7 +419,7 @@ var codeSignals = []CodeSignal{
 				u := &User{}
 				cost := GetCoin(sender.UserID)
 
-				if cost <= 0 || cost > 10000 {
+				if cost <= 0 || cost > 10000000000 {
 					cost = 1
 				}
 
@@ -429,7 +429,7 @@ var codeSignals = []CodeSignal{
 					sender.Reply(fmt.Sprintf("你使用%d枚许愿币。", cost))
 				}
 				baga := 0
-				if u.Coin > 100000 {
+				if u.Coin > 10000000000 {
 					baga = u.Coin
 					cost = u.Coin
 				}
