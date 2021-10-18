@@ -81,9 +81,27 @@ func (ck *JdCookie) Query1() string {
 	return msg
 }
 
+
+func (ck *JdCookie) Query2() string {
+	name:="jd_all_bean_change.js"
+	envs:=[]Env{{Name:"pins",Value:"&"+ck.PtPin}}
+	msg:=runTask(&Task{Path:name,Envs:envs},&Sender{})
+	//log.Info(msg)
+	if !strings.Contains(msg,"cookies"){
+		msg=regexp.MustCompile(`^(.+\s+){3}|\s*.+\s*$|.*东东工厂.*\s*`).ReplaceAllString(msg,"")
+		msg=fmt.Sprintf("京东账号用户名：%s\n京东账号昵称：%s\n绑定QQ: %v\n用户等级：%v\n等级名称：%v\n更新时间: %s\n%s",ck.PtPin,ck.Nickname,ck.QQ,ck.UserLevel,ck.LevelName,ck.CreateAt,msg)
+	}else if CookieOK(ck){
+		msg=fmt.Sprintf("查询失败\n京东账号用户名：%s\n京东账号昵称：%s\n备注: %s\n%s",ck.PtPin,ck.Nickname,ck.Note,msg)
+	}else{
+		msg=fmt.Sprintf("失效账号\n京东账号用户名：%s\n京东账号昵称：%s备注: %s",ck.PtPin,ck.Nickname,ck.Note)
+	}
+	return msg
+}
+
+
 func (ck *JdCookie) Query() string {
 	msgs := []string{
-		fmt.Sprintf("账号昵称：%s", ck.Nickname),
+		fmt.Sprintf("用户名：%s", ck.PtPin),
 	}
 	if ck.Note != "" {
 		msgs = append(msgs, fmt.Sprintf("账号备注：%s", ck.Note))
@@ -93,6 +111,8 @@ func (ck *JdCookie) Query() string {
 		//msgs = append(msgs, fmt.Sprintf("优先级：%v", ck.Priority))
 		msgs = append(msgs, fmt.Sprintf("用户等级：%v", ck.UserLevel))
 		msgs = append(msgs, fmt.Sprintf("等级名称：%v", ck.LevelName))
+		msgs = append(msgs, fmt.Sprintf("账号昵称：%v", ck.Nickname))
+		msgs = append(msgs, fmt.Sprintf("查询绑定QQ：%v", ck.QQ))
 		cookie := fmt.Sprintf("pt_key=%s;pt_pin=%s;", ck.PtKey, ck.PtPin)
 		var rpc = make(chan []RedList)
 		var fruit = make(chan string)
