@@ -1,11 +1,11 @@
 mode: balance #模式 balance(均衡模式)、parallel(平行模式)
 containers:
  #主容器
-  - address: 
-    username: 
-    password: 
-    cid: 
-    secret: 
+  - address:       #青龙的地址
+    username:     #青龙的用户名
+    password:     #青龙密码
+    cid:         #青龙的cid 2.9以上可以设置 
+    secret:      #青龙的sec 2.9以上可以设置 
     weigth:  
     mode: parallel
     limit: 9999  
