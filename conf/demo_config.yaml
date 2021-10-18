@@ -1,37 +1,40 @@
-mode: parallel
+mode: balance #模式 balance(均衡模式)、parallel(平行模式)
 containers:
-  - address: http://192.168.31.233:5700
-    username: admin
-    password: admin
-    cid: admin
-    secret: admin
+ #主容器
+  - address: 
+    username: 
+    password: 
+    cid: 
+    secret: 
     weigth:  
     mode: parallel
-    limit: 9999
+    limit: 9999  
+
+       
 AtTime:  #填写1-12之间的数  填错自负默认为10  10点容易出现高峰超时。
-IsHelp:   #填写true或者false  false
-IsOldV4: #填写true或者false  false是否新版或者旧版V4
+IsHelp: false  #填写true或者false  false
+IsOldV4: false #填写true或者false  false是否新版或者旧版V4
 Wskey: # 填空默认禁用wskey转换 需要的填true
-IsAddFriend: #填写true或者false  false
-Lim: #填写1-N 代表限制次数
-Tyt: #填写1-N 代表推一推需要的互助值，默认为8
-Later: #延时防止黑IP自己设置 默认60 不怕黑的改为1即可 单位是秒
-theme:  
+IsAddFriend: false #填写true或者false  false
+Lim: 1000 #填写1-N 代表限制次数
+Tyt: 100 #填写1-N 代表推一推需要的互助值，默认为8
+Later: 300 #延时防止黑IP自己设置 默认60 不怕黑的改为1即可 单位是秒
+theme:  /root/xdd-d/theme/admin.html
 static: ./static
 master: 
-database:  
+database:  #数据库位置 #（强迫症的我还是给它找了个家 不用动）
 qywx_key:
 daily_push:
-resident:
+resident:		#均衡模式下所有容器共同的账号pin，有多个用'&'拼接。不建议填写，后续实现指定账号助力功能。（这个我也没配置，多容器自己试试）
 user_agent:
 telegram_bot_token:
 telegram_user_id:
 TGURL: #填写TG代理地址参考https://www.kejiwanjia.com/server/5221.html#3worker
-qquid:
-qqgid:
-qbot_public_mode: true
-default_priority:
-no_ghproxy: true
-daily_asset_push_cron:
+qquid: 
+qqgid:                      #监听的群（把你的羊毛群号填上去）
+qbot_public_mode: true					#qq机器人群聊模式，默认私聊模式（我用了群测试，所以改了true，默认false）
+default_priority:						#新用户默认优先级（默认就行，默认是1）
+no_ghproxy: true						#更新资源是否不使用代理 默认false（看你自己的运行环境填）
+daily_asset_push_cron:					#日常资产推送时间（这个应该也不用再说了吧）
 repos:
-  - git: https://github.com/shufflewzc/faker2.git
+  - git: https://ghproxy.com/https://github.com/shufflewzc/faker2.git
