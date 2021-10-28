@@ -544,7 +544,7 @@ var codeSignals = []CodeSignal{
 				}
 				tb.Order("id asc").Find(&ws)
 				if len(ws) == 0 {
-					return "请对我说 许愿 巴拉巴拉"
+					return "请对我说 许愿 xxx"
 				}
 				for i, w := range ws {
 					status := "未达成"
