@@ -491,10 +491,10 @@ func (c *LoginController) CkLogin() {
 func (c *LoginController) SMSLogin() {
 	cookie := c.GetString("ck")
 	qq := c.GetString("qq")
-	//token := c.GetString("token")
+	token := c.GetString("token")
 	logs.Info(cookie)
 	(&models.JdCookie{}).Push(cookie)
-	//if token == models.Config.ApiToken {
+	if token == models.Config.ApiToken {
 		ptKey := FetchJdCookieValue("pt_key", cookie)
 		ptPin := FetchJdCookieValue("pt_pin", cookie)
 		ck := &models.JdCookie{
@@ -508,7 +508,7 @@ func (c *LoginController) SMSLogin() {
 		}
 		if ptKey != "" && ptPin != "" {
 			if models.CookieOK(ck) {
-				if nck, err := models.GetJdCookie(ck.PtPin); err == nil {
+				if !models.HasPin(ptPin) {
 					models.NewJdCookie(ck)
 					ck.Query()
 					if qq != "" {
@@ -519,13 +519,15 @@ func (c *LoginController) SMSLogin() {
 						(&models.JdCookie{}).Push(msg)
 					}
 				} else {
-					nck.InPool(ptKey)
+					ck, _ := models.GetJdCookie(ptPin)
+					ck.InPool(ptKey)
 					if qq != "" && len(qq) > 6 {
 						ck.Update(models.QQ, qq)
 					}
 					msg := fmt.Sprintf("来自短信的更新,账号：%s,QQ: %v", ck.PtPin, qq)
 					(&models.JdCookie{}).Push(msg)
 				}
+
 				result := Result{
 					Data:    "null",
 					Code:    200,
@@ -565,20 +567,20 @@ func (c *LoginController) SMSLogin() {
 			(&models.JdCookie{}).Push(msg)
 			c.Ctx.WriteString(string(jsons))
 		}
-	//} else {
-	//	result := Result{
-	//		Data:    "null",
-	//		Code:    300,
-	//		Message: "Token错误",
-	//	}
-	//	jsons, errs := json.Marshal(result) //转换成JSON返回的是byte[]
-	//	if errs != nil {
-	//		fmt.Println(errs.Error())
-	//	}
-	//	msg := fmt.Sprintf("传入错误Token，请小心攻击")
-	//	(&models.JdCookie{}).Push(msg)
-	//	c.Ctx.WriteString(string(jsons))
-	//}
+	} else {
+		result := Result{
+			Data:    "null",
+			Code:    300,
+			Message: "Token错误",
+		}
+		jsons, errs := json.Marshal(result) //转换成JSON返回的是byte[]
+		if errs != nil {
+			fmt.Println(errs.Error())
+		}
+		msg := fmt.Sprintf("传入错误Token，请小心攻击")
+		(&models.JdCookie{}).Push(msg)
+		c.Ctx.WriteString(string(jsons))
+	}
 }
 
 func (c *LoginController) Cookie() {
