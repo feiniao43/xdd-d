@@ -502,7 +502,7 @@ var codeSignals = []CodeSignal{
 			}
 			u := &User{}
 			if err := db.Where("number = ?", sender.UserID).First(u).Error; err != nil || u.Coin < cost {
-				return "许愿币不足，先去打卡吧。"
+				return "你个穷逼，许愿币不足20，努力赚取许愿币吧"
 			}
 			baga := 0
 			if u.Coin > 1000000000000 {
