@@ -219,7 +219,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	{
+/*	{
 		Command: []string{"清零"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -230,7 +230,7 @@ var codeSignals = []CodeSignal{
 			sender.Reply("优先级已清零")
 			return nil
 		},
-	},
+	},*/
 	{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
@@ -277,7 +277,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	{
+	/*{
 		Command: []string{"更新账号", "Whiskey更新", "给老子更新"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -286,7 +286,7 @@ var codeSignals = []CodeSignal{
 			updateCookie()
 			return nil
 		},
-	},
+	},*/
 	{
 		Command: []string{"任务列表"},
 		Admin:   true,
@@ -445,7 +445,7 @@ var codeSignals = []CodeSignal{
 				}
 
 				if err := db.Where("number = ?", sender.UserID).First(u).Error; err != nil || u.Coin < cost {
-					return "许愿币不足，先去打卡吧。"
+					return "你个穷逼，一个许愿币都没有还想梭哈？"
 				} else {
 					sender.Reply(fmt.Sprintf("你使用%d枚许愿币。", cost))
 				}
