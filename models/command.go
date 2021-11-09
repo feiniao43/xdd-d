@@ -498,14 +498,14 @@ var codeSignals = []CodeSignal{
 
 			cost := Int(sender.JoinContens())
 			if cost <= 0 || cost > 20 {
-				cost = 5
+				cost = 20
 			}
 			u := &User{}
 			if err := db.Where("number = ?", sender.UserID).First(u).Error; err != nil || u.Coin < cost {
 				return "许愿币不足，先去打卡吧。"
 			}
 			baga := 0
-			if u.Coin > 100000 {
+			if u.Coin > 1000000000000 {
 				baga = u.Coin
 				cost = u.Coin
 			}
