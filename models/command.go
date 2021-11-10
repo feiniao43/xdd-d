@@ -95,8 +95,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			}
 		}
 		if !ok {
-			sender.Reply("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
-			return errors.New("你的QQ尚未绑定🐶东账号,请加机器人为好友，把正确格式的ck发机器人后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
+			sender.Reply("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888登录后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
+			return errors.New("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888登录后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
 		}
 	} else {
 		cks = LimitJdCookie(cks, a)
