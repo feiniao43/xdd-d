@@ -219,7 +219,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-/*	{
+  	/*{
 		Command: []string{"清零"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -818,7 +818,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	/*{
+	{
 		Command: []string{"更新指定"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -854,7 +854,7 @@ var codeSignals = []CodeSignal{
 			})
 			return nil
 		},
-	},*/
+	},
 	{
 		Command: []string{"删除", "clean"},
 		Admin:   true,
@@ -911,7 +911,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	/*{
+	{
 		Command: []string{"删除WCK"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -984,7 +984,7 @@ var codeSignals = []CodeSignal{
 			tx.Commit()
 			return fmt.Sprintf("转账成功，你的余额%d，他的余额%d，手续费%d。", s.Coin-amount, r.Coin+real, cost)
 		},
-	},*/
+	},
 	{
 		Command: []string{"献祭", "导出"},
 		Admin:   true,
