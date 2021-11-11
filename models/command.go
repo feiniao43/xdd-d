@@ -120,7 +120,7 @@ var codeSignals = []CodeSignal{
 			return Count()
 		},
 	},
-	/*{
+	{
 		Command: []string{"清空WCK"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -163,7 +163,7 @@ var codeSignals = []CodeSignal{
 			//ddd, _ := base64.StdEncoding.DecodeString("data:image/png;base64,"+s.Data.QqLoginQrcode.Bytes)
 			return "data:image/png;base64," + s.Data.QqLoginQrcode.Bytes
 		},
-	},*/
+	},
 	{
 		Command: []string{ "打卡", "签到"},
 		Handle: func(sender *Sender) interface{} {
