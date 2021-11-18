@@ -232,6 +232,20 @@ var codeSignals = []CodeSignal{
 		},
 	},*/
 	{
+		Command: []string{"优先级清零"},
+		Admin:   true,
+		Handle: func(sender *Sender) interface{} {
+			cks := GetJdCookies()
+			if sender.IsAdmin {
+				for i := range cks {
+					cks[i].Update(Priority, 1)
+				}
+			}
+			sender.Reply("优先级已清零零")
+			return nil
+		},
+	},
+	{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
