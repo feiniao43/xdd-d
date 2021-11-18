@@ -245,7 +245,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	{
+	/*{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
@@ -261,7 +261,7 @@ var codeSignals = []CodeSignal{
 			}
 			return nil
 		},
-	},
+	},*/
 
 	{
 		Command: []string{"coin", "许愿币", "余额", "yu", "yue"},
