@@ -219,7 +219,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-  	/*{
+  	{
 		Command: []string{"清零"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
@@ -230,9 +230,9 @@ var codeSignals = []CodeSignal{
 			sender.Reply("优先级已清零")
 			return nil
 		},
-	},*/
+	},
 	{
-		Command: []string{"优先级清零"},
+		Command: []string{"重置所有优先级"},
 		Admin:   true,
 		Handle: func(sender *Sender) interface{} {
 			cks := GetJdCookies()
@@ -241,11 +241,11 @@ var codeSignals = []CodeSignal{
 					cks[i].Update(Priority, 1)
 				}
 			}
-			sender.Reply("优先级已清零零")
+			sender.Reply("优所有优先级已重置")
 			return nil
 		},
 	},
-	/*{
+	{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
@@ -261,7 +261,7 @@ var codeSignals = []CodeSignal{
 			}
 			return nil
 		},
-	},*/
+	},
 
 	{
 		Command: []string{"coin", "许愿币", "余额", "yu", "yue"},
