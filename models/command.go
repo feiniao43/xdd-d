@@ -95,8 +95,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			}
 		}
 		if !ok {
-			sender.Reply("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888登录后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
-			return errors.New("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888登录后即可查询，并且你可以在群里@Q群管家获得帮助、教程和注意事项。")
+			sender.Reply("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
+			return errors.New("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
 		}
 	} else {
 		cks = LimitJdCookie(cks, a)
@@ -245,7 +245,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-	{
+/*{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
@@ -261,7 +261,7 @@ var codeSignals = []CodeSignal{
 			}
 			return nil
 		},
-	},
+	},*/
 
 	{
 		Command: []string{"coin", "许愿币", "余额", "yu", "yue"},
