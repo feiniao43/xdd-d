@@ -250,7 +250,7 @@ var codeSignals = []CodeSignal{
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
 			t := time.Now()
-			if t.Weekday().String() == "Monday" && int(t.Hour()) <= 23 {
+			if t.Weekday().String() == "Monday" && int(t.Hour()) <= 22 {
 				sender.handleJdCookies(func(ck *JdCookie) {
 					ck.Update(Priority, coin)
 				})
