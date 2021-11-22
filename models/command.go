@@ -379,7 +379,7 @@ var codeSignals = []CodeSignal{
 		Handle: func(sender *Sender) interface{} {
 			if sender.IsAdmin {
 				sender.handleJdCookies(func(ck *JdCookie) {
-					sender.Reply(ck.Query2())
+					sender.Reply(ck.Query3())
 				})
 			} else {
 				if getLimit(sender.UserID, 1) {
