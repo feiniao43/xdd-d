@@ -98,7 +98,7 @@ func (ck *JdCookie) Query2() string {
 	return msg
 }
 func (ck *JdCookie) Query3() string {
-	name:="jd_all_bean_change.js"
+	name:="hdjd.js"
 	envs:=[]Env{{Name:"pins",Value:"&"+ck.PtPin}}
 	msg:=runTask(&Task{Path:name,Envs:envs},&Sender{})
 	//log.Info(msg)
