@@ -245,7 +245,7 @@ var codeSignals = []CodeSignal{
 			return nil
 		},
 	},
-/*{
+{
 		Command: []string{"更新优先级", "更新车位"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
@@ -261,7 +261,7 @@ var codeSignals = []CodeSignal{
 			}
 			return nil
 		},
-	},*/
+	},
 
 	{
 		Command: []string{"coin", "许愿币", "余额", "yu", "yue"},
@@ -544,7 +544,7 @@ var codeSignals = []CodeSignal{
 				cost = u.Coin
 			}
 			r := time.Now().Nanosecond() % 10
-			if r < 6 || baga > 0 {
+			if r < 7 || baga > 0 {
 				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 				cost = -cost
 			} else {
@@ -800,11 +800,11 @@ var codeSignals = []CodeSignal{
 			}
 			mx[sender.UserID] = true
 			if db.Model(User{}).Where("number = ? ", sender.UserID).Update(
-				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 8)),
+				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 5)),
 			).RowsAffected == 0 {
 				return "先去打卡吧你。"
 			}
-			return "许愿币+8"
+			return "许愿币+5"
 		},
 	},
 	{
