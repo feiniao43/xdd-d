@@ -494,12 +494,12 @@ var codeSignals = []CodeSignal{
 					cost = -cost
 				} else {
 					if r == 9 {
-						cost *= 4
-						sender.Reply(fmt.Sprintf("恭喜你4倍暴击获得%d枚许愿币，20秒后自动转入余额。", cost))
-						time.Sleep(time.Second * 20)
+						cost *= 3
+						sender.Reply(fmt.Sprintf("恭喜你3倍暴击获得%d枚许愿币，2秒后自动转入余额。", cost))
+						time.Sleep(time.Second * 2)
 					} else {
-						sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，10秒后自动转入余额。", cost))
-						time.Sleep(time.Second * 10)
+						sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，2秒后自动转入余额。", cost))
+						time.Sleep(time.Second * 2)
 					}
 					sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
 				}
@@ -544,17 +544,17 @@ var codeSignals = []CodeSignal{
 				cost = u.Coin
 			}
 			r := time.Now().Nanosecond() % 10
-			if r < 7 || baga > 0 {
+			if r < 6 || baga > 0 {
 				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 				cost = -cost
 			} else {
 				if r == 9 {
 					cost *= 2
-					sender.Reply(fmt.Sprintf("恭喜你幸运暴击x2获得%d枚许愿币，5秒后自动转入余额。", cost))
-					time.Sleep(time.Second * 5)
+					sender.Reply(fmt.Sprintf("恭喜你幸运暴击x2获得%d枚许愿币，2秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 2)
 				} else {
-					sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，5秒后自动转入余额。", cost))
-					time.Sleep(time.Second * 5)
+					sender.Reply(fmt.Sprintf("很幸运你获得%d枚许愿币，2秒后自动转入余额。", cost))
+					time.Sleep(time.Second * 2)
 				}
 				sender.Reply(fmt.Sprintf("%d枚许愿币已到账。", cost))
 			}
@@ -800,11 +800,11 @@ var codeSignals = []CodeSignal{
 			}
 			mx[sender.UserID] = true
 			if db.Model(User{}).Where("number = ? ", sender.UserID).Update(
-				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 5)),
+				"coin", gorm.Expr(fmt.Sprintf("coin + %d", 8)),
 			).RowsAffected == 0 {
 				return "先去打卡吧你。"
 			}
-			return "许愿币+5"
+			return "许愿币+8"
 		},
 	},
 	{
