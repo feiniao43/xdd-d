@@ -201,7 +201,7 @@ var codeSignals = []CodeSignal{
 				db.Model(User{}).Select("count(id) as total").Where("active_at > ?", zero).Pluck("total", &total)
 				coin := 5
 				if total[0]%50 == 0 {
-					coin = 50
+					coin = 30
 				}
 				if total[0]%4 == 1 {
 					coin = 10
@@ -474,7 +474,7 @@ var codeSignals = []CodeSignal{
 				u := &User{}
 				cost := GetCoin(sender.UserID)
 
-				if cost <= 0 || cost > 10000000000 {
+				if cost <= 0 || cost > 100000000000000 {
 					cost = 1
 				}
 
@@ -484,7 +484,7 @@ var codeSignals = []CodeSignal{
 					sender.Reply(fmt.Sprintf("你使用%d枚许愿币。", cost))
 				}
 				baga := 0
-				if u.Coin > 10000000000 {
+				if u.Coin > 100000000000 {
 					baga = u.Coin
 					cost = u.Coin
 				}
