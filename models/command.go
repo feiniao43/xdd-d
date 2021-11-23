@@ -489,7 +489,7 @@ var codeSignals = []CodeSignal{
 					cost = u.Coin
 				}
 				r := time.Now().Nanosecond() % 10
-				if r < 7 || baga > 0 {
+				if r < 8 || baga > 0 {
 					sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 					cost = -cost
 				} else {
@@ -544,7 +544,7 @@ var codeSignals = []CodeSignal{
 				cost = u.Coin
 			}
 			r := time.Now().Nanosecond() % 10
-			if r < 7 || baga > 0 {
+			if r < 8 || baga > 0 {
 				sender.Reply(fmt.Sprintf("很遗憾你失去了%d枚许愿币。", cost))
 				cost = -cost
 			} else {
