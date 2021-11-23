@@ -246,7 +246,7 @@ var codeSignals = []CodeSignal{
 		},
 	},
 {
-		Command: []string{"更新优先级", "更新车位"},
+		Command: []string{"更新优先级", "更新车位", "车位更新"},
 		Handle: func(sender *Sender) interface{} {
 			coin := GetCoin(sender.UserID)
 			t := time.Now()
