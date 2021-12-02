@@ -256,7 +256,7 @@ func (ck *JdCookie) Query() string {
 
 	} else {
 		msgs = append(msgs, []string{
-			"提醒：该账号已CK过期，请打开网址 www.luyangmao.fun:8888 提交",
+			"提醒：该账号已CK过期，请打开网址 http://www.luyangmao.fun:8888（因网站备案问题可能无法打开，请直接使用ip访问：http://49.234.157.95:8888）  提交",
 		}...)
 	}
 	ck.PtPin, _ = url.QueryUnescape(ck.PtPin)
