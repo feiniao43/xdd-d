@@ -95,8 +95,8 @@ func (sender *Sender) handleJdCookies(handle func(ck *JdCookie)) error {
 			}
 		}
 		if !ok {
-			sender.Reply("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
-			return errors.New("你的QQ尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
+			sender.Reply("你的QQ查询功能尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888（域名正在备案，可能无法访问，请直接使用ip地址打开http://49.234.157.95:8888） 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
+			return errors.New("你的QQ查询功能尚未绑定🐶东账号,请打开网址www.luyangmao.fun:8888（域名正在备案，可能无法访问，请直接使用ip地址打开http://49.234.157.95:8888） 输入手机号码、验证码、QQ号登录后即可查询，并且你可以在群里发送“菜单”指令获得帮助")
 		}
 	} else {
 		cks = LimitJdCookie(cks, a)
